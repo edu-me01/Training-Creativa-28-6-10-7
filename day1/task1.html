@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team</title>
     <style>
         /* Global Styles */
+        
         * {
             box-sizing: border-box;
             margin: 0;
@@ -17,15 +19,15 @@
             background-color: #f5f5f5;
             color: #333;
         }
-        
         /* Navigation Bar */
+        
         .navbar {
             background: linear-gradient(135deg, #3498db, #2c3e50);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -57,8 +59,8 @@
         .nav-links a:hover {
             color: #f1c40f;
         }
-        
         /* Header Section */
+        
         .header {
             text-align: center;
             padding: 3rem 1rem;
@@ -78,8 +80,8 @@
             max-width: 800px;
             margin: 0 auto;
         }
-        
         /* Team Section with Cards */
+        
         .team-section {
             padding: 2rem;
             margin: 2rem auto;
@@ -103,13 +105,13 @@
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .team-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
         
         .card-img {
@@ -186,8 +188,8 @@
             background-color: #3498db;
             color: white;
         }
-        
         /* Stats Section */
+        
         .stats-section {
             padding: 3rem 2rem;
             background: linear-gradient(135deg, #2c3e50, #3498db);
@@ -223,8 +225,8 @@
         .stat-label {
             font-size: 1.1rem;
         }
-        
         /* Footer */
+        
         footer {
             background-color: #2c3e50;
             color: white;
@@ -232,35 +234,59 @@
             padding: 2rem;
             margin-top: 2rem;
         }
-        
         /* Responsive Design */
+        
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
                 padding: 1rem;
             }
-            
             .nav-links {
                 margin-top: 1rem;
                 flex-direction: column;
                 align-items: center;
             }
-            
             .nav-links li {
                 margin-left: 0;
                 margin-bottom: 0.5rem;
             }
-            
             .team-container {
                 grid-template-columns: 1fr;
             }
-            
             .stats-container {
                 flex-direction: column;
             }
         }
+        
+        .control-buttons {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            margin: 30px 0 !important;
+        }
+        
+        .control-buttons button {
+            margin: 40px;
+            justify-content: space-between;
+            padding: 10px;
+            outline: none;
+            border: none;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        
+        .control-buttons .add-card {
+            background-color: #2a2;
+            color: #fff;
+        }
+        
+        .control-buttons .remove-card {
+            background-color: #a22;
+            color: #fff
+        }
     </style>
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
@@ -272,23 +298,23 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
-    
+
     <!-- Header Section -->
     <header class="header">
         <h1>Our Professional Team</h1>
         <p>We are a team of skilled professionals in development and design, working together to provide the best technical solutions for our clients</p>
     </header>
-    
+
     <!-- Team Section with Cards -->
     <section id="team" class="team-section">
         <h2>Team Members</h2>
-        
-        <div class="team-container">
+
+        <div class="team-container" id="allCards">
             <!-- Team Member 1 -->
-            <div class="team-card">
+            <div class="team-card" id="singleCard">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith" class="card-img">
                 <div class="card-content">
-                    <h3>John Smith</h3>
+                    <h3 class="userName">John Smith</h3>
                     <span class="role">Lead Web Developer</span>
                     <p>Specialized in web application development using modern technologies like React and Node.js. Over 5 years of experience in the field.</p>
                     <div class="skills">
@@ -303,12 +329,12 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Team Member 2 -->
             <div class="team-card">
                 <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="card-img">
                 <div class="card-content">
-                    <h3>Sarah Johnson</h3>
+                    <h3 class="userName">Sarah Johnson</h3>
                     <span class="role">UI/UX Designer</span>
                     <p>Specialized in user experience and interface design. Works on improving user experience and making applications more user-friendly.</p>
                     <div class="skills">
@@ -323,12 +349,12 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Team Member 3 -->
             <div class="team-card">
                 <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Michael Brown" class="card-img">
                 <div class="card-content">
-                    <h3>Michael Brown</h3>
+                    <h3 class="userName">Michael Brown</h3>
                     <span class="role">Mobile App Developer</span>
                     <p>Expert in mobile app development using React Native and Flutter. Focuses on building high-performance, user-friendly applications.</p>
                     <div class="skills">
@@ -344,8 +370,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="control-buttons">
+            <button class="add-card" id="addCard">add card</button>
+            <button class="remove-card" id="removeCard" onclick="removeCard()">remove last card</button>
+        </div>
     </section>
-    
+
     <!-- Stats Section -->
     <section id="stats" class="stats-section">
         <h2>Our Team Stats</h2>
@@ -368,11 +399,31 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer id="contact">
         <p>© 2023 Our Team. All rights reserved.</p>
         <p>Email: info@team.com | Phone: 0123456789</p>
     </footer>
+
+    <script>
+        // Add event listener to the contact button
+        document.getElementById('addCard').addEventListener('click', function() {
+            // dublicate the cards
+            var card = document.getElementById("singleCard")
+            var copyCard = card.cloneNode(true);
+            copyCard.getElementsByClassName("userName")[0].innerText = prompt("type name");
+            copyCard.getElementsByClassName("card-img")[0].src = 'https://placehold.co/350x250';
+            var allcards = document.getElementById("allCards")
+            allcards.appendChild(copyCard);
+        });
+
+        function removeCard() {
+            var allcards = document.getElementById("allCards")
+            var lastCard = allcards.lastElementChild;
+            allcards.removeChild(lastCard);
+        }
+    </script>
 </body>
+
 </html>

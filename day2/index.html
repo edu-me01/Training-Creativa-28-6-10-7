@@ -1,1 +1,28 @@
-Untitled-1.html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2</title>
+</head>
+
+<body>
+    <button id="greetMe"> say hi to me </button>
+    <script>
+        // Active greeting message 
+        const greetButtun = document.getElementById('greetMe');
+        greetButtun.addEventListener('click', () => {
+            name = prompt("اكتب اسمك هنا");
+            if (name == "ahmed") {
+                alert("hi admin ", "مرحبا بك");
+            } else {
+                alert("hello " + name)
+            }
+            // cansel تفتكر اي هيحصل لو داس 
+        });
+        // نفذ الدالة دي بشكل مختلف
+    </script>
+</body>
+
+</html>
