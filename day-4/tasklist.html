@@ -63,7 +63,19 @@
     <input type="text" id="taskInput" placeholder="Add a new task">
     <button id="addBtn">Add</button>
     <ul id="taskList"></ul>
-    <script src="tasklist.js"></script>
+    <!-- <script src="tasklist.js"></script> -->
+    <script>
+        document.getElementById('addBtn').addEventListener('click', () => {
+        let input = document.getElementById('taskInput'),
+            list = document.getElementById('taskList');
+            // const li = document.createElement('li');
+            // li.textContent = input.value;
+            // document.getElementById('taskList').appendChild(li);
+
+            list.innerHTML += `<li>${input.value}</li>`;
+            input.value = '';
+        });
+    </script>
 
 </body>
 </html>
