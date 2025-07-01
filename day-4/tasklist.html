@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        #taskList {
+            list-style-type: none;
+            padding: 0;
+        }
+        #taskList li {
+            margin-bottom: 10px;
+        }
+        #taskInput {
+            width: 300px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        #addBtn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #addBtn:hover {
+            background-color: #45a049;
+        }
+        #taskList li.done {
+            text-decoration: line-through;
+            color: #888;
+        }
+        #taskList li.done span {
+            text-decoration: line-through;
+            color: #888;
+        }
+        #taskList li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #taskList li span {
+            flex: 1;
+        }
+        #taskList li input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        #taskList li input[type="checkbox"]:checked + span {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task List</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task">
+    <button id="addBtn">Add</button>
+    <ul id="taskList"></ul>
+    <script src="tasklist.js"></script>
+
+</body>
+</html>
