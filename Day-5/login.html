@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            width: 350px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 25px;
+            color: #4a6bdf;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .login-btn {
+            background-color: #4a6bdf;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .login-btn:hover {
+            background-color: #3a56c7;
+        }
+        .error {
+            color: #dc3545;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <div class="error" id="errorMsg">Please enter your username.</div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required autocomplete="off">
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+    <script>
+        // إذا كان المستخدم مسجل دخول بالفعل، يذهب مباشرة للداشبورد
+        if (localStorage.getItem('loggedInUser')) {
+            window.location.href = 'index.html';
+        }
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            if (username === '') {
+                errorMsg.style.display = 'block';
+                return;
+            }
+            localStorage.setItem('loggedInUser', username);
+            window.location.href = 'index.html';
+        });
+        document.getElementById('username').addEventListener('input', function() {
+            document.getElementById('errorMsg').style.display = 'none';
+        });
+    </script>
+</body>
+</html> 
