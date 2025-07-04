@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="posts-container"></div>
+    <script>
+        async function displayPosts(dataParam) {
+        const response = await fetch(dataParam);
+        const posts = await response.json();
+
+        const container = document.getElementById('posts-container');
+        posts.forEach(post => {
+            container.innerHTML += `
+            <div class="post">
+                <h3>${post.title}</h3>
+                <p>${post.body}</p>
+            </div>
+            `;
+        });
+        }
+
+        // displayPosts('https://jsonplaceholder.typicode.com/posts?_limit=5');
+
+    </script>
+
+   <div id="user-container"></div>
+    <script>
+        async function displayUser(dataParam) {
+            const response = await fetch(dataParam);
+            const user = await response.json();
+
+            const container = document.getElementById('user-container');
+            container.innerHTML = `
+                <p>Name: ${user.name}</p>
+                <p>Email: ${user.email}</p>
+            `;
+        }
+
+        // displayUser('https://jsonplaceholder.typicode.com/users/1');
+    </script>
+
+
+    <script>
+        async function fetchData(dataParam) {
+            try {
+                const response = await fetch(dataParam);
+                
+                if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // fetchData('https://jsonplaceholder.typicode.com/posts/1000');
+    </script>
+
+    <script>
+        async function getUser(passData) {
+            try {
+                const response = await fetch(passData);
+                
+                if (!response.ok) {
+                    throw new Error('User not found');
+                }
+
+                const user = await response.json();
+                console.log(user);
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+        // getUser('https://jsonplaceholder.typicode.com/users/1000');
+    </script>
+
+    <div id="todo-list"></div>
+    <script>
+        async function displayTodos(toDoParams) {
+            const response = await fetch(toDoParams);
+            const todos = await response.json();
+
+            const container = document.getElementById('todo-list');
+            todos.forEach(todo => {
+                container.innerHTML += `
+                <div>
+                    <p>${todo.title}</p>
+                    <p>Status: ${todo.completed == true ? 'Completed' : 'Pending'}</p>
+                </div>
+                `;
+            });
+        }
+        // displayTodos('https://jsonplaceholder.typicode.com/todos?_limit=5');
+    </script>
+
+    <script>
+        const users = [
+            { id: 1, name: "Ali" },
+            { id: 2, name: "Sara" }
+        ];
+
+        const user = users.find(u => u.id === 2);
+        // console.log(user); // { id: 2, name: "Sara" }
+
+        const numbers = [1, 3, 5, 8];
+        const hasEven = numbers.some(n => n % 2 === 0);
+        // console.log(hasEven); // true
+
+        const ages = [20, 25, 30];
+        const allAdults = ages.every(age => age >= 18);
+        // console.log(allAdults); // true
+    </script>
+
+    <!-- task answer -->
+     <script>
+        const tasks = [
+            { id: 1, title: "Task 1", completed: true },
+            { id: 2, title: "Task 2", completed: false },
+            { id: 3, title: "Task 3", completed: true }
+        ];
+
+        // find
+        const firstCompleted = tasks.find(t => t.completed);
+        // console.log(firstCompleted);
+
+        // some
+        const hasIncomplete = tasks.some(t => !t.completed);
+        // console.log(hasIncomplete); // true
+
+        // every
+        const allCompleted = tasks.every(t => t.completed);
+        // console.log(allCompleted); // false
+     </script>
+
+     <script>
+        class ShoppingCart {
+            constructor() {
+                this.items = JSON.parse(localStorage.getItem('cart')) || [];
+            }
+            addItem(item) {
+                this.items.push(item);
+                this._saveToStorage();
+            }
+            getTotal() {
+                // return this.items.reduce((sum, item) => sum + item.price, 0);
+                const subtotal = this.items.reduce((sum, item) => sum + item.price, 0);
+                return this.items.length >= 3 ? subtotal * 0.9 : subtotal;
+            }
+            _saveToStorage() {
+                localStorage.setItem('cart', JSON.stringify(this.items));
+            }
+            removeItem(index) {
+                if (index >= 0 && index < this.items.length) {
+                    this.items.splice(index, 1); // remove 1 element at the given index
+                    this._saveToStorage();
+                } else if (index > this.items.length) {
+                    console.log('out side the range');
+                } else if (index < 0 ){
+                    console.log("so small");
+                } else{
+                    console.log("index is not a number");
+                }
+            }
+            clearCart() {
+                this.items = [];
+                this._saveToStorage();
+            }
+        }
+
+        var cart = new ShoppingCart();
+     </script>
+
+    <script>
+        
+    </script>
+
+</body>
+</html>
