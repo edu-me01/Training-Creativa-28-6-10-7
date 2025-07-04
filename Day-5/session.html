@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manipulation Demo</title>
+    <style>
+      :root {
+        --primary: #4a6bdf;
+        --secondary: #f8f9fa;
+        --dark: #343a40;
+        --light: #ffffff;
+        --success: #28a745;
+        --danger: #dc3545;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--secondary);
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      header {
+        background-color: var(--primary);
+        color: var(--light);
+        padding: 20px 0;
+        text-align: center;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .panel {
+        background-color: var(--light);
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .panel-title {
+        color: var(--primary);
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 10px;
+      }
+
+      .demo-area {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .demo-box {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .demo-title {
+        font-weight: bold;
+        color: var(--primary);
+      }
+
+      .demo-element {
+        padding: 10px;
+        background-color: #e9ecef;
+        border-radius: 4px;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #3a5bd9;
+      }
+
+      .btn-success {
+        background-color: var(--success);
+        color: white;
+      }
+
+      .btn-success:hover {
+        background-color: #218838;
+      }
+
+      .btn-danger {
+        background-color: var(--danger);
+        color: white;
+      }
+
+      .btn-danger:hover {
+        background-color: #c82333;
+      }
+
+      .btn-dark {
+        background-color: var(--dark);
+        color: white;
+      }
+
+      .btn-dark:hover {
+        background-color: #23272b;
+      }
+
+      .highlight {
+       background-color:#3a5bd9;
+      }
+
+      /* @keyframes highlight {
+        0% {
+          background-color: #fff3cd;
+        }
+        100% {
+          background-color: transparent;
+        }
+      } */
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px;
+        color: #6c757d;
+        font-size: 0.9rem;
+      }
+
+      /* Classes for demo */
+      .active {
+        border-left: 4px solid var(--success);
+        background-color: #e8f5e9;
+      }
+
+      .warning {
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+      }
+      .query{
+               background:linear-gradient(45deg,red,blue);
+               padding:20px;
+               border-radius:20px;
+               color:#fff;
+               transition: all 1s ;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>DOM Manipulation Demo</h1>
+        <p class="subtitle">
+          Practical demonstration of DOM selectors and manipulation methods
+        </p>
+      </header>
+
+      <div class="panel">
+        <h2 class="panel-title">DOM Selector Methods</h2>
+        <div class="demo-area">
+          <div class="demo-box" id="selectorDemo">
+            <div class="demo-title">Selector Methods Demonstration</div>
+            <div class="demo-element" id="elementById">
+              Element selected by ID
+            </div>
+            <div class="demo-element class-demo">Element with class (1)</div>
+            <div class="demo-element class-demo">Element with class (2)</div>
+            <div class="demo-element">
+              <p>Paragraph inside div</p>
+            </div>
+            <div class="controls">
+              <button class="btn btn-primary" onclick="getID()">
+                getElementById
+              </button>
+              <button
+                class="btn btn-primary"
+                onclick="getClassName()"
+              >
+                getElementsByClassName
+              </button>
+              <button
+                class="btn btn-primary"
+                onclick="demoGetElementsByTagName()"
+              >
+                getElementsByTagName
+              </button>
+              <button class="btn btn-primary" onclick="query()">
+                querySelector
+              </button>
+              <button class="btn btn-primary" onclick="queryy()">
+                querySelectorAll
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Content Manipulation</h2>
+        <div class="demo-area">
+          <div class="demo-box" id="contentDemo">
+            <div class="demo-title">Change Element Content</div>
+            <div class="demo-element" id="contentElement">
+              This text will change when you click the buttons below
+            </div>
+            <div class="controls">
+              <button class="btn btn-success" onclick="changeTextContent()">
+                textContent
+              </button>
+              <button class="btn btn-success" onclick="changeInnerHTML()">
+                innerHTML
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Attribute Manipulation</h2>
+        <div class="demo-area">
+          <div class="demo-box" id="attributeDemo">
+            <div class="demo-title">Change Element Attributes</div>
+            <div class="demo-element">
+              <a href="https://www.google.com" id="linkElement" target="_blank"
+                >Google Link</a
+              >
+            </div>
+            <div class="controls">
+              <button class="btn btn-primary" onclick="changeLinkAttr()">
+                Change Link
+              </button>
+              <button class="btn btn-success" onclick="getLinkAttr()">
+                Get Link
+              </button>
+              <button class="btn btn-danger" onclick="removeLinkAttr()">
+                Remove Link
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Style Manipulation</h2>
+        <div class="demo-area">
+          <div class="demo-box" id="styleDemo">
+            <div class="demo-title">Change Element Styles</div>
+            <div class="demo-element" id="styleElement">
+              This element's style will change when you click the buttons
+            </div>
+            <div class="controls">
+              <button class="btn btn-primary" onclick="changeStyleColor()">
+                Change Color
+              </button>
+              <button class="btn btn-success" onclick="changeStyleBG()">
+                Change Background
+              </button>
+              <button class="btn btn-danger" onclick="resetStyles()">
+                Reset Styles
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Class List Manipulation</h2>
+        <div class="demo-area">
+          <div class="demo-box" id="classDemo">
+            <div class="demo-title">Modify CSS Classes</div>
+            <div class="demo-element" id="classElement">
+              This element will have classes added/removed
+            </div>
+            <div class="controls">
+              <button class="btn btn-primary" onclick="addClass()">
+                Add Class
+              </button>
+              <button class="btn btn-danger" onclick="removeClass()">
+                Remove Class
+              </button>
+              <button class="btn btn-success" onclick="toggleClass()">
+                Toggle Class
+              </button>
+              <button class="btn btn-dark" onclick="checkClass()">
+                Check Class
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        This interactive demo demonstrates DOM selection and manipulation
+        methods using pure JavaScript
+      </footer>
+    </div>
+
+    <!-- <script>
+      // DOM Selector Methods
+      function demoGetElementById() {
+        const element = document.getElementById("elementById");
+        element.textContent = "Selected by ID  ";
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      function demoGetElementsByClassName() {
+        const elements = document.getElementsByClassName("class-demo");
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].textContent = `Selected by class (${i + 1}) - `;
+          elements[i].classList.add("highlight");
+          setTimeout(() => elements[i].classList.remove("highlight"), 1500);
+        }
+      }
+
+      function demoGetElementsByTagName() {
+        const elements = document.getElementsByTagName("p");
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].textContent = `Selected by tag (p) - `;
+          elements[i].classList.add("highlight");
+          setTimeout(() => elements[i].classList.remove("highlight"), 1500);
+        }
+      }
+
+      function demoQuerySelector() {
+        const element = document.querySelector(".demo-element");
+        element.textContent = "First element selected by querySelector - ";
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      function demoQuerySelectorAll() {
+        const elements = document.querySelectorAll(".demo-element");
+        elements.forEach((el, i) => {
+          el.textContent =
+            `Element ${i + 1} selected by querySelectorAll - `;
+          el.classList.add("highlight");
+          setTimeout(() => el.classList.remove("highlight"), 1500);
+        });
+      }
+
+      // Content Manipulation
+      function changeTextContent() {
+        const element = document.getElementById("contentElement");
+        element.textContent = "Content changed with textContent at: ";
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      function changeInnerHTML() {
+        const element = document.getElementById("contentElement");
+        element.innerHTML = "<b>Content changed</b> with <i>innerHTML</i> at: ";
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      // Attribute Manipulation
+      function changeLinkAttr() {
+        const link = document.getElementById("linkElement");
+        link.setAttribute("href", "https://www.youtube.com");
+        link.textContent = "YouTube Link (changed)";
+        link.parentElement.classList.add("highlight");
+        setTimeout(
+          () => link.parentElement.classList.remove("highlight"),
+          1500
+        );
+      }
+
+      function getLinkAttr() {
+        const link = document.getElementById("linkElement");
+        alert("Current link href: " + link.getAttribute("href"));
+      }
+
+      function removeLinkAttr() {
+        const link = document.getElementById("linkElement");
+        link.removeAttribute("href");
+        link.textContent = "Link href removed";
+        link.parentElement.classList.add("highlight");
+        setTimeout(
+          () => link.parentElement.classList.remove("highlight"),
+          1500
+        );
+      }
+
+      // Style Manipulation
+      function changeStyleColor() {
+        const element = document.getElementById("styleElement");
+        const colors = ["red", "blue", "green", "purple", "orange"];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        element.style.color = randomColor;
+        element.style.fontSize = "18px";
+        element.style.fontWeight = "bold";
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      function changeStyleBG() {
+        const element = document.getElementById("styleElement");
+        const colors = ["#ffeeba", "#c3e6cb", "#b8daff", "#f5c6cb", "#d6d8db"];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        element.style.backgroundColor = randomColor;
+        element.style.padding = "10px";
+        element.style.borderRadius = "5px";
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      function resetStyles() {
+        const element = document.getElementById("styleElement");
+        element.style = "";
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      // Class List Manipulation
+      function addClass() {
+        const element = document.getElementById("classElement");
+        element.classList.add("active");
+        element.textContent = 'Added "active" class to element';
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      function removeClass() {
+        const element = document.getElementById("classElement");
+        element.classList.remove("active");
+        element.textContent = 'Removed "active" class from element';
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      function toggleClass() {
+        const element = document.getElementById("classElement");
+        element.classList.toggle("active");
+        const hasClass = element.classList.contains("active");
+        element.textContent = hasClass
+          ? 'Toggled "active" class ON'
+          : 'Toggled "active" class OFF';
+        element.classList.add("highlight");
+        setTimeout(() => element.classList.remove("highlight"), 1500);
+      }
+
+      function checkClass() {
+        const element = document.getElementById("classElement");
+        const hasClass = element.classList.contains("active");
+        alert(
+          hasClass
+            ? 'Element HAS the "active" class'
+            : 'Element DOES NOT HAVE the "active" class'
+        );
+      }
+    </script> -->
+<script src="script.js"> </script>
+</body>
+</html>

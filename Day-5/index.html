@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus | Modern Web Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: rgba(67, 97, 238, 0.1);
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #2b2d42;
+            --text-light: #8d99ae;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background:  url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            color: white;
+            padding: 140px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-bg-shapes {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background: none;
+        }
+        .hero-bg-shapes::before,
+        .hero-bg-shapes::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(32px);
+            opacity: 0.25;
+            z-index: 1;
+        }
+        .hero-bg-shapes::before {
+            width: 400px;
+            height: 400px;
+            left: -120px;
+            top: -100px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 80%);
+            animation: heroShape1 12s linear infinite alternate;
+        }
+        .hero-bg-shapes::after {
+            width: 300px;
+            height: 300px;
+            right: -80px;
+            bottom: -80px;
+            background: radial-gradient(circle, #fff 0%, transparent 80%);
+            animation: heroShape2 10s linear infinite alternate;
+        }
+        @keyframes heroShape1 {
+            0% { transform: scale(1) translateY(0); }
+            100% { transform: scale(1.2) translateY(40px); }
+        }
+        @keyframes heroShape2 {
+            0% { transform: scale(1) translateY(0); }
+            100% { transform: scale(1.1) translateY(-30px); }
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-card {
+            background: rgba(255,255,255,0.12);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 48px 36px 36px 36px;
+            max-width: 540px;
+            margin: 0 auto 32px auto;
+            transition: box-shadow 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 1s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        .hero-card.animated {
+            animation: heroBounce 0.7s;
+        }
+        @keyframes heroBounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.08); }
+            60% { transform: scale(0.96); }
+            100% { transform: scale(1); }
+        }
+        .hero-card h1 {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: #fff;
+            text-shadow: 0 2px 16px rgba(67,97,238,0.08);
+        }
+        .hero-card p {
+            font-size: 1.25rem;
+            margin-bottom: 36px;
+            color: #f3f3f3;
+            opacity: 0.95;
+            transition: opacity 0.3s;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(67,97,238,0.08);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #fff 60%, var(--accent) 100%);
+            color: var(--primary);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, var(--accent) 0%, #fff 100%);
+            color: var(--secondary);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(67,97,238,0.18);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: #fff;
+            color: var(--accent);
+        }
+        .hero-customize-panel {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+        .customize-btn {
+            background: rgba(1, 63, 133, 0.629);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 8px rgba(67,97,238,0.08);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+        .customize-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: scale(1.12);
+        }
+        
+        @media (max-width: 700px) {
+            .hero {
+                padding: 80px 0 40px;
+            }
+            .hero-card {
+                padding: 28px 10px 24px 10px;
+                max-width: 98vw;
+            }
+            .hero-card h1 {
+                font-size: 1.6rem;
+            }
+            .hero-card p {
+                font-size: 1rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Features Section */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* --- Modernized Features Section --- */
+        .features-customize-panel {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 24px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.13);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 18px;
+            padding: 36px 24px 28px 24px;
+            text-align: center;
+            transition: box-shadow 0.3s, transform 0.3s;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        .feature-card.animated {
+            animation: featureBounce 0.7s;
+        }
+        @keyframes featureBounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.08); }
+            60% { transform: scale(0.96); }
+            100% { transform: scale(1); }
+        }
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 32px 0 rgba(67,97,238,0.18);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 18px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .feature-card:hover .feature-icon {
+            color: var(--primary);
+            transform: scale(1.15);
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .feature-card p {
+            color: #444;
+            opacity: 0.92;
+            font-size: 1.05rem;
+        }
+        @media (max-width: 700px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .feature-card {
+                padding: 22px 8px 18px 8px;
+            }
+        }
+
+        /* Services Section */
+        .services {
+            background-color: #f5f7ff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-image {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .service-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* Stats Section */
+        .stats-section-modern {
+            position: relative;
+            padding: 100px 0;
+            background: none;
+            z-index: 1;
+        }
+        .stats-bg-shape {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 70% 30%, #4cc9f0 0%, transparent 70%),
+                        radial-gradient(circle at 20% 80%, #4361ee 0%, transparent 70%);
+            opacity: 0.18;
+        }
+        .stats-modern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-modern-card {
+            background: rgba(255,255,255,0.18);
+            box-shadow: 0 8px 32px 0 rgba(67,97,238,0.13);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 22px;
+            padding: 44px 28px 36px 28px;
+            text-align: center;
+            transition: box-shadow 0.3s, transform 0.3s, background 0.3s;
+            border: 1.5px solid rgba(67,97,238,0.10);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: fadeInUp 0.9s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        .stat-modern-card:hover {
+            background: rgba(76,201,240,0.13);
+            box-shadow: 0 16px 40px 0 rgba(67,97,238,0.18);
+            transform: translateY(-8px) scale(1.04);
+        }
+        .stat-modern-icon {
+            font-size: 2.7rem;
+            color: var(--accent);
+            margin-bottom: 18px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .stat-modern-card:hover .stat-modern-icon {
+            color: var(--primary);
+            transform: scale(1.18);
+        }
+        .stat-modern-number {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+            text-shadow: 0 2px 16px rgba(67,97,238,0.08);
+        }
+        .stat-modern-label {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 700px) {
+            .stats-modern-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .stat-modern-card {
+                padding: 28px 10px 22px 10px;
+            }
+        }
+
+        /* Contact Section */
+        .contact-form-modern {
+            background: #fff;
+            border-radius: 14px;
+            padding: 40px 32px 32px 32px;
+            box-shadow: 0 8px 32px 0 rgba(67,97,238,0.10);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            transition: box-shadow 0.3s;
+        }
+        .contact-form-modern:hover {
+            box-shadow: 0 16px 40px 0 rgba(67,97,238,0.18);
+        }
+        .form-row {
+            display: flex;
+            gap: 24px;
+        }
+        .form-group-modern {
+            flex: 1;
+            margin-bottom: 22px;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group-modern label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        .form-group-modern input,
+        .form-group-modern textarea {
+            padding: 13px 16px;
+            border: 1.5px solid #e0e6f7;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border 0.2s, box-shadow 0.2s;
+            background: #f8faff;
+            resize: none;
+        }
+        .form-group-modern input:focus,
+        .form-group-modern textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+            outline: none;
+        }
+        .form-group-modern textarea {
+            min-height: 110px;
+        }
+        .submit-btn-modern {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: #fff;
+            border: none;
+            padding: 14px 0;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(67,97,238,0.08);
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .submit-btn-modern:hover {
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 24px rgba(67,97,238,0.13);
+        }
+        .contact-cards-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 24px;
+            margin-top: 10px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .contact-card {
+            background: linear-gradient(120deg, #f8faff 60%, #e0e6f7 100%);
+            border-radius: 14px;
+            box-shadow: 0 4px 18px 0 rgba(67,97,238,0.08);
+            padding: 28px 22px 22px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            animation: cardFadeIn 0.6s cubic-bezier(.23,1.01,.32,1) forwards;
+        }
+        .contact-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .contact-card .card-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(67,97,238,0.10);
+        }
+        .contact-card .card-name {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        .contact-card .card-email {
+            color: var(--text-light);
+            font-size: 0.98rem;
+            word-break: break-all;
+        }
+        .contact-card .card-message {
+            margin-top: 6px;
+            color: var(--text);
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+        @keyframes cardFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        @media (max-width: 700px) {
+            .contact-form-modern {
+                padding: 18px 6px 16px 6px;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .contact-cards-list {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-column p {
+            opacity: 0.7;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: var(--transition);
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .navbar {
+                padding: 15px 0;
+            }
+
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .contact-form-modern {
+                padding: 18px 6px 16px 6px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-column a:hover {
+                transform: none;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Login Page */
+        .login-page-modern {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .login-page-modern.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .login-container-modern {
+            background: #fff;
+            border-radius: 18px;
+            padding: 48px 36px 36px 36px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 12px 40px 0 rgba(67,97,238,0.18);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        .login-close-modern {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            font-size: 24px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .login-close-modern:hover {
+            color: var(--danger);
+        }
+        .login-logo-modern {
+            font-size: 3.2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .login-container-modern h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        .login-form-modern {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .login-group-modern {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .login-group-modern label {
+            font-weight: 500;
+            color: var(--primary);
+        }
+        .login-group-modern input {
+            padding: 12px 14px;
+            border: 1.5px solid #e0e6f7;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: #f8faff;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .login-group-modern input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+            outline: none;
+        }
+        .login-btn-modern {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: #fff;
+            border: none;
+            padding: 13px 0;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(67,97,238,0.08);
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .login-btn-modern:hover {
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 24px rgba(67,97,238,0.13);
+        }
+        .login-footer-modern {
+            text-align: center;
+            margin-top: 18px;
+            color: var(--text-light);
+            font-size: 0.98rem;
+        }
+        .login-footer-modern a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        @media (max-width: 600px) {
+            .login-container-modern {
+                padding: 18px 6px 16px 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-bolt logo-icon"></i>
+                    <span>Nexus</span>
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <a href="#">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <a href="#" class="cta-button" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </a>
+                <span id="userDisplay" style="margin-left:18px;font-weight:600;color:var(--primary);"></span>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-shapes" aria-hidden="true"></div>
+        <div class="container">
+            <div class="hero-card">
+                <h1 id="heroTitle">Modern Solutions for Digital Excellence</h1>
+                <p id="heroDesc">We craft beautiful digital experiences that drive results and elevate your brand to new heights.</p>
+                <div class="hero-buttons">
+                    <a href="#features" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        <span>Explore Features</span>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Contact Us</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-customize-panel">
+                <button id="toggleDescBtn" class="customize-btn" title="Show/Hide Description"><i class="fas fa-eye-slash"></i></button>
+                <button id="changeBgBtn" class="customize-btn" title="Change Background"><i class="fas fa-palette"></i></button>
+                <button id="addCtaBtn" class="customize-btn" title="Add CTA Button"><i class="fas fa-plus"></i></button>
+                <button id="animateHeroBtn" class="customize-btn" title="Animate Card"><i class="fas fa-magic"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Us</h2>
+                <p>Our platform offers everything you need to build a powerful online presence.</p>
+            </div>
+            <div class="features-customize-panel">
+                <button id="toggleFeaturesBtn" class="customize-btn" title="Show/Hide Features"><i class="fas fa-eye-slash"></i></button>
+                <button id="addFeatureBtn" class="customize-btn" title="Add Feature"><i class="fas fa-plus"></i></button>
+                <button id="animateFeaturesBtn" class="customize-btn" title="Animate Cards"><i class="fas fa-magic"></i></button>
+            </div>
+            <div class="features-grid" id="featuresGrid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized for performance with instant load times and smooth animations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Fully Responsive</h3>
+                    <p>Looks perfect on any device from smartphones to large desktop screens.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Customizable</h3>
+                    <p>Easily customize every aspect to match your brand identity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer comprehensive solutions to meet all your digital needs.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Web Development</h3>
+                        <p>Custom websites built with modern technologies for optimal performance.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Digital Marketing</h3>
+                        <p>Strategies to grow your online presence and reach your target audience.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>UI/UX Design</h3>
+                        <p>Beautiful interfaces designed for exceptional user experiences.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats-section-modern">
+        <div class="stats-bg-shape" aria-hidden="true"></div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Impact</h2>
+                <p>Numbers that speak about our dedication and success</p>
+            </div>
+            <div class="stats-modern-grid">
+                <div class="stat-modern-card">
+                    <div class="stat-modern-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-modern-number" id="clientCount">25</div>
+                    <div class="stat-modern-label">Happy Clients</div>
+                </div>
+                <div class="stat-modern-card">
+                    <div class="stat-modern-icon"><i class="fas fa-briefcase"></i></div>
+                    <div class="stat-modern-number" id="projectCount">500</div>
+                    <div class="stat-modern-label">Projects Completed</div>
+                </div>
+                <div class="stat-modern-card">
+                    <div class="stat-modern-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="stat-modern-number" id="awardCount">400</div>
+                    <div class="stat-modern-label">Awards Won</div>
+                </div>
+                <div class="stat-modern-card">
+                    <div class="stat-modern-icon"><i class="fas fa-user-friends"></i></div>
+                    <div class="stat-modern-number" id="teamCount">88</div>
+                    <div class="stat-modern-label">Team Members</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Have a project in mind? We'd love to hear from you.</p>
+            </div>
+            <form class="contact-form-modern" id="contactFormModern" autocomplete="off">
+                <div class="form-row">
+                    <div class="form-group-modern">
+                        <label for="modernName">Name</label>
+                        <input type="text" id="modernName" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group-modern">
+                        <label for="modernEmail">Email</label>
+                        <input type="email" id="modernEmail" required placeholder="you@email.com">
+                    </div>
+                </div>
+                <div class="form-group-modern">
+                    <label for="modernMessage">Message</label>
+                    <textarea id="modernMessage" required placeholder="Type your message..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn-modern">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Send Message</span>
+                </button>
+            </form>
+            <div class="contact-cards-list" id="contactCardsList"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Nexus</h3>
+                    <p>Modern solutions for digital excellence. We help businesses grow through innovative technology.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="#">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <a href="#">Web Development</a>
+                    <a href="#">Digital Marketing</a>
+                    <a href="#">UI/UX Design</a>
+                    <a href="#">Consulting</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> 123 Business Ave, New York, NY 10001</a>
+                    <a href="mailto:info@nexus.com"><i class="fas fa-envelope"></i> info@nexus.com</a>
+                    <a href="tel:+15551234567"><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</a>
+                    <a href="#"><i class="fas fa-clock"></i> Mon-Fri: 9AM - 5PM</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Nexus. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Login Page -->
+    <div class="login-page-modern" id="loginPage">
+        <div class="login-container-modern">
+            <div class="login-close-modern" id="loginClose">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="login-logo-modern"><i class="fas fa-user-circle"></i></div>
+            <h2>Welcome Back</h2>
+            <form class="login-form-modern" id="loginForm">
+                <div class="login-group-modern">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter your username" required />
+                </div>
+                <div class="login-group-modern">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required />
+                </div>
+                <button type="submit" class="login-btn-modern">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </button>
+            </form>
+            <div class="login-footer-modern">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    if (this.getAttribute('href') === '#') return;
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        // Close mobile menu if open
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+            
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Login modal
+            const loginBtn = document.getElementById('loginBtn');
+            const loginPage = document.getElementById('loginPage');
+            const loginClose = document.getElementById('loginClose');
+            const loginForm = document.getElementById('loginForm');
+            
+            loginBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginPage.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            loginClose.addEventListener('click', function() {
+                loginPage.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            loginPage.addEventListener('click', function(e) {
+                if (e.target === loginPage) {
+                    loginPage.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactFormModern');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('modernName').value.trim();
+                const email = document.getElementById('modernEmail').value.trim();
+                const message = document.getElementById('modernMessage').value.trim();
+                if (!name || !email || !message) return;
+                // Create card
+                const card = document.createElement('div');
+                card.className = 'contact-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-avatar">${name.charAt(0).toUpperCase()}</div>
+                        <div>
+                            <div class="card-name">${name}</div>
+                            <div class="card-email">${email}</div>
+                        </div>
+                    </div>
+                    <div class="card-message">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+                `;
+                // Insert at the top
+                const cardsList = document.getElementById('contactCardsList');
+                cardsList.insertBefore(card, cardsList.firstChild);
+                // Reset form
+                contactForm.reset();
+            });
+            
+            // Login form submit
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('username').value.trim();
+                if (username) {
+                    localStorage.setItem('nexus_username', username);
+                    updateNavbarUser();
+                    loginPage.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    loginForm.reset();
+                }
+            });
+            
+            // Navbar username logic
+            let userDisplay = document.getElementById('userDisplay');
+            function updateNavbarUser() {
+                const username = localStorage.getItem('nexus_username');
+                if (username) {
+                    userDisplay.textContent = `👤 ${username}`;
+                } else {
+                    userDisplay.textContent = '';
+                }
+            }
+            updateNavbarUser();
+            
+            // Animate stats counter
+//             function animateCounter(element, start, end, duration) {
+//                 let startTimestamp = null;
+//                 const step = (timestamp) => {
+//                     if (!startTimestamp) startTimestamp = timestamp;
+//                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+//                     element.innerHTML = Math.floor(progress * (end - start) + start);
+//                     if (progress < 1) {
+//                         window.requestAnimationFrame(step);
+//                     }
+//                 };
+//                 window.requestAnimationFrame(step);
+//             }
+            
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('stats-modern-grid')) {
+                            animateCounter(document.getElementById('clientCount'), 0, 250, 2000);
+                            animateCounter(document.getElementById('projectCount'), 0, 500, 2000);
+                            animateCounter(document.getElementById('awardCount'), 0, 25, 2000);
+                            animateCounter(document.getElementById('teamCount'), 0, 50, 2000);
+                        }
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe elements that should animate
+            document.querySelectorAll('.feature-card, .service-card, .stats-modern-grid, .contact-form').forEach(el => {
+                observer.observe(el);
+            });
+
+            // --- HERO SECTION INTERACTIVITY ---
+            const heroDesc = document.getElementById('heroDesc');
+            const toggleDescBtn = document.getElementById('toggleDescBtn');
+            const changeBgBtn = document.getElementById('changeBgBtn');
+            const addCtaBtn = document.getElementById('addCtaBtn');
+            const animateHeroBtn = document.getElementById('animateHeroBtn');
+            const heroCard = document.querySelector('.hero-card');
+            const heroButtons = document.querySelector('.hero-buttons');
+            const hero = document.querySelector('.hero');
+            let descVisible = true;
+            let ctaCount = 0;
+            const bgGradients = [
+                'linear-gradient(135deg, #4361ee, #3a0ca3)',
+                'linear-gradient(135deg, #4cc9f0, #4361ee)',
+                'linear-gradient(135deg, #f72585, #7209b7)',
+                'linear-gradient(135deg, #b5179e, #560bad)',
+                'linear-gradient(135deg, #4895ef, #4cc9f0)'
+            ];
+            let bgIdx = 0;
+
+            // Toggle description
+            toggleDescBtn.addEventListener('click', function() {
+                descVisible = !descVisible;
+                heroDesc.style.opacity = descVisible ? '0.95' : '0';
+                heroDesc.style.pointerEvents = descVisible ? 'auto' : 'none';
+                this.innerHTML = descVisible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            });
+
+            // Change background
+            changeBgBtn.addEventListener('click', function() {
+                bgIdx = (bgIdx + 1) % bgGradients.length;
+                hero.style.background = bgGradients[bgIdx];
+            });
+
+            // Add CTA button
+            addCtaBtn.addEventListener('click', function() {
+                ctaCount++;
+                const btn = document.createElement('a');
+                btn.href = '#';
+                btn.className = 'btn btn-primary';
+                btn.innerHTML = `<i class='fas fa-star'></i> <span>Custom CTA ${ctaCount}</span>`;
+                btn.style.animation = 'fadeInUp 0.6s';
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Custom CTA Clicked!');
+                });
+                heroButtons.appendChild(btn);
+            });
+
+            // Animate hero card
+            animateHeroBtn.addEventListener('click', function() {
+                heroCard.classList.remove('animated');
+                void heroCard.offsetWidth; // trigger reflow
+                heroCard.classList.add('animated');
+            });
+
+            // --- FEATURES SECTION INTERACTIVITY ---
+            const featuresGrid = document.getElementById('featuresGrid');
+            const toggleFeaturesBtn = document.getElementById('toggleFeaturesBtn');
+            const addFeatureBtn = document.getElementById('addFeatureBtn');
+            const animateFeaturesBtn = document.getElementById('animateFeaturesBtn');
+            let featuresVisible = true;
+            let featureCount = 3;
+            // Toggle features visibility
+            toggleFeaturesBtn.addEventListener('click', function() {
+                featuresVisible = !featuresVisible;
+                featuresGrid.style.display = featuresVisible ? 'grid' : 'none';
+                this.innerHTML = featuresVisible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            });
+            // Add a new feature card
+            addFeatureBtn.addEventListener('click', function() {
+                featureCount++;
+                const card = document.createElement('div');
+                card.className = 'feature-card';
+                card.style.animation = 'fadeInUp 0.7s';
+                card.innerHTML = `
+                    <div class="feature-icon"><i class="fas fa-star"></i></div>
+                    <h3>New Feature ${featureCount}</h3>
+                    <p>This is a dynamically added feature card. You can add as many as you like!</p>
+                `;
+                featuresGrid.appendChild(card);
+            });
+            // Animate all feature cards
+            animateFeaturesBtn.addEventListener('click', function() {
+                document.querySelectorAll('.feature-card').forEach(card => {
+                    card.classList.remove('animated');
+                    void card.offsetWidth;
+                    card.classList.add('animated');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <style>
+        /* Global Styles */
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        /* Navigation Bar */
+        
+        .navbar {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #f1c40f;
+        }
+        /* Header Section */
+        
+        .header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        /* Team Section with Cards */
+        
+        .team-section {
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+        
+        .team-section h2 {
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-content .role {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .card-content p {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill {
+            background-color: #e0f7fa;
+            color: #00838f;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-outline {
+            border: 2px solid #3498db;
+            color: #3498db;
+        }
+        
+        .btn-outline:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        /* Stats Section */
+        
+        .stats-section {
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-section h2 {
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .stat-item {
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #f1c40f;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+        }
+        /* Footer */
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .nav-links {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-links li {
+                margin-left: 0;
+                margin-bottom: 0.5rem;
+            }
+            .team-container {
+                grid-template-columns: 1fr;
+            }
+            .stats-container {
+                flex-direction: column;
+            }
+        }
+        
+        .control-buttons {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            margin: 30px 0 !important;
+        }
+        
+        .control-buttons button {
+            margin: 40px;
+            justify-content: space-between;
+            padding: 10px;
+            outline: none;
+            border: none;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        
+        .control-buttons .add-card {
+            background-color: #2a2;
+            color: #fff;
+        }
+        
+        .control-buttons .remove-card {
+            background-color: #a22;
+            color: #fff
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="#" class="logo">Our Team</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#stats">Stats</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="header">
+        <h1>Our Professional Team</h1>
+        <p>We are a team of skilled professionals in development and design, working together to provide the best technical solutions for our clients</p>
+    </header>
+
+    <!-- Team Section with Cards -->
+    <section id="team" class="team-section">
+        <h2>Team Members</h2>
+
+        <div class="team-container" id="allCards">
+            <!-- Team Member 1 -->
+            <div class="team-card" id="singleCard">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith" class="card-img">
+                <div class="card-content">
+                    <h3 class="userName">John Smith</h3>
+                    <span class="role">Lead Web Developer</span>
+                    <p>Specialized in web application development using modern technologies like React and Node.js. Over 5 years of experience in the field.</p>
+                    <div class="skills">
+                        <span class="skill">HTML</span>
+                        <span class="skill">CSS</span>
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">React</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="#" class="btn btn-primary">View Profile</a>
+                        <a href="#" class="btn btn-outline">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="team-card">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="card-img">
+                <div class="card-content">
+                    <h3 class="userName">Sarah Johnson</h3>
+                    <span class="role">UI/UX Designer</span>
+                    <p>Specialized in user experience and interface design. Works on improving user experience and making applications more user-friendly.</p>
+                    <div class="skills">
+                        <span class="skill">Figma</span>
+                        <span class="skill">UI Design</span>
+                        <span class="skill">UX Research</span>
+                        <span class="skill">Prototyping</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="#" class="btn btn-primary">View Profile</a>
+                        <a href="#" class="btn btn-outline">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="team-card">
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Michael Brown" class="card-img">
+                <div class="card-content">
+                    <h3 class="userName">Michael Brown</h3>
+                    <span class="role">Mobile App Developer</span>
+                    <p>Expert in mobile app development using React Native and Flutter. Focuses on building high-performance, user-friendly applications.</p>
+                    <div class="skills">
+                        <span class="skill">React Native</span>
+                        <span class="skill">Flutter</span>
+                        <span class="skill">Firebase</span>
+                        <span class="skill">Mobile UI</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="#" class="btn btn-primary">View Profile</a>
+                        <a href="#" class="btn btn-outline">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-buttons">
+            <button class="add-card" id="addCard">add card</button>
+            <button class="remove-card" id="removeCard" onclick="removeCard()">remove last card</button>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats-section">
+        <h2>Our Team Stats</h2>
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Combined Years of Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Completed Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Mastered Technologies</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>© 2023 Our Team. All rights reserved.</p>
+        <p>Email: info@team.com | Phone: 0123456789</p>
+    </footer>
+
+    <script>
+        // Add event listener to the contact button
+        document.getElementById('addCard').addEventListener('click', function() {
+            // dublicate the cards
+            var card = document.getElementById("singleCard")
+            var copyCard = card.cloneNode(true);
+            copyCard.getElementsByClassName("userName")[0].innerText = prompt("type name");
+            copyCard.getElementsByClassName("card-img")[0].src = 'https://placehold.co/350x250';
+            var allcards = document.getElementById("allCards")
+            allcards.appendChild(copyCard);
+        });
+
+        function removeCard() {
+            var allcards = document.getElementById("allCards")
+            var lastCard = allcards.lastElementChild;
+            allcards.removeChild(lastCard);
+        }
+    </script>
+</body>
+
+</html>

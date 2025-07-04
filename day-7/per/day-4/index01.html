@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Day 4 - JavaScript Examples</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f9f9f9;
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        pre,
+        code {
+            background: #fff;
+            padding: 10px;
+            display: block;
+            border-left: 4px solid #007acc;
+            margin-bottom: 20px;
+            font-family: Consolas, monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Day 4: JavaScript Examples</h1>
+
+    <h2>DOM Manipulation – Change Content</h2>
+    <p>Use <code>getElementById</code> to select and update an element's text content.</p>
+    <pre><code>const heading = document.getElementById('title');
+heading.textContent = 'Welcome Back!';</code></pre>
+
+    <h2>DOM Manipulation – Add Event Listener</h2>
+    <p>Add an event listener to respond to button clicks.</p>
+    <pre><code>document.getElementById('btn').addEventListener('click', () => {
+  alert('Button Clicked!');
+});</code></pre>
+
+    <h2>Arrays – Basic Access</h2>
+    <p>Accessing elements using array indexing.</p>
+    <pre><code>const fruits = ['Apple', 'Banana', 'Mango'];
+console.log(fruits[1]); // 'Banana'</code></pre>
+
+    <h2>Arrays – Push Method</h2>
+    <p>Add an item to the array using <code>push</code>.</p>
+    <pre><code>const tasks = [];
+tasks.push('Study JavaScript');
+console.log(tasks);</code></pre>
+
+    <h2>Array Modification – Insert with Splice</h2>
+    <p>Use <code>splice</code> to insert elements at a specific index.</p>
+    <pre><code>const colors = ['red', 'blue'];
+colors.splice(1, 0, 'yellow');</code></pre>
+
+    <h2>Loops – forEach</h2>
+    <p>Iterate over arrays using <code>forEach</code> with access to index.</p>
+    <pre><code>const tasks = ['Design', 'Code', 'Test'];
+tasks.forEach((t, i) => console.log(`${i + 1}: ${t}`));</code></pre>
+
+    <h2>localStorage – Save & Get</h2>
+    <p>Store a string in localStorage and retrieve it.</p>
+    <pre><code>localStorage.setItem('theme', 'dark');
+console.log(localStorage.getItem('theme'));</code></pre>
+
+    <h2>localStorage – Store Objects</h2>
+    <p>Use <code>JSON.stringify</code> to store objects.</p>
+    <pre><code>const user = { name: 'Ali', level: 3 };
+localStorage.setItem('user', JSON.stringify(user));</code></pre>
+
+    <h2>CRUD – Delete Task</h2>
+    <p>Delete a task from array and update localStorage.</p>
+    <pre><code>function deleteTask(id) {
+  tasks = tasks.filter(t => t.id !== id);
+  saveTasks();
+}</code></pre>
+
+    <h2>Mini Project – Task Stats</h2>
+    <p>Calculate basic task statistics.</p>
+    <pre><code>function getStats(tasks) {
+  return {
+    total: tasks.length,
+    done: tasks.filter(t => t.done).length,
+    pending: tasks.filter(t => !t.done).length,
+  };
+}</code></pre>
+</body>
+
+</html>

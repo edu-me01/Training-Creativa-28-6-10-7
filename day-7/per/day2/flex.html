@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Dashboard Example</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+        
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex:1;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            flex: 4;
+        }
+        
+        .sidebar {
+            background-color: #495057;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .stats-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex: 1;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Individual card styling using order and align-self */
+        .card:nth-child(1) {
+            order: 1;
+            align-self: flex-start;
+            border-top: 4px solid #4e73df;
+        }
+        
+        .card:nth-child(2) {
+            order: 3;
+            align-self: center;
+            border-top: 4px solid #1cc88a;
+        }
+        
+        .card:nth-child(3) {
+            order: 2;
+            align-self: flex-end;
+            border-top: 4px solid #e74a3b;
+        }
+        
+        .main-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex: 1;
+        }
+        
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            flex: 3;
+            align-items: center;
+        }
+        
+        .menu-item {
+            padding: 12px 15px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .menu-item:hover {
+            background-color: #5a6268;
+            transform: translateX(5px);
+        }
+        
+        .special-item {
+            align-self: flex-start;
+            background-color: #e74a3b;
+            margin-top: auto;
+            font-weight: bold;
+        }
+        
+        .special-item:hover {
+            background-color: #d62c1a;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: auto;
+                order: 2;
+            }
+            
+            .stats-cards {
+                flex-direction: column;
+            }
+            
+            .card {
+                align-self: stretch !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <h1>Dashboard</h1>
+            <div>Welcome back, John!</div>
+        </header>
+        
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="menu-item">Dashboard</div>
+                <div class="menu-item">Orders</div>
+                <div class="menu-item">Products</div>
+                <div class="menu-item">Customers</div>
+                <div class="menu-item">Reports</div>
+                <div class="menu-item special-item">Logout</div>
+            </aside>
+            
+            <main class="content">
+                <div class="stats-cards">
+                    <div class="card">
+                        <h3>Total Sales</h3>
+                        <p>$25,000</p>
+                    </div>
+                    <div class="card">
+                        <h3>Customers</h3>
+                        <p>1,248</p>
+                    </div>
+                    <div class="card">
+                        <h3>New Orders</h3>
+                        <p>36</p>
+                    </div>
+                </div>
+                
+                <div class="main-card">
+                    <h2>Overview</h2>
+                    <p>This is a professional Flexbox dashboard example. Try resizing your browser to see the responsive layout in action. Notice how the cards reorder and realign based on the screen size.</p>
+                    <p>Key Flexbox features demonstrated: flex-direction, justify-content, align-items, gap, flex, order, and align-self.</p>
+                </div>
+            </main>
+        </div>
+        
+        <footer class="footer">
+            <p>&copy; 2023 Company Name. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
