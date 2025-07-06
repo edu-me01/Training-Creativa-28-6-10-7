@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arrow functions</title>
+</head>
+<body>
+    <input type="text" name="" id="username">
+    <button onclick="greeting()">greet</button>
+    <script>
+        function greeting() {
+            var name = document.getElementById("username").value
+            alert(`hello ${name}`)
+        }
+        
+        var greet = () => {
+            var name = document.getElementById("username").value
+            alert(`hello ${name}`)
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة درجات الطلاب - OOP</title>
+  <style>
+    body { font-family: Arial; background: #f0f0f0; padding: 20px; direction: rtl; }
+    .box { background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 0 10px #ccc; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #444; color: white; }
+    input, button, select { padding: 8px; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>📋 جدول الطلاب ودرجاتهم (OOP + Inheritance)</h2>
+
+    <!-- جدول عرض الطلاب ودرجاتهم -->
+    <table id="studentsTable">
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>رياضيات</th>
+          <th>إنجليزي</th>
+          <th>فيزياء</th>
+          <th>كيمياء</th>
+          <th>أحياء</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- إدخال اسم طالب لعرض مجموع درجاته -->
+    <h3>🔍 مجموع درجات طالب معين</h3>
+    <input id="studentNameInput" placeholder="اكتب اسم الطالب" />
+    <button onclick="getStudentTotal()">اعرض المجموع</button>
+    <p id="studentTotal"></p>
+
+    <!-- إدخال اسم مادة لعرض مجموع درجاتها -->
+    <h3>📚 مجموع درجات مادة</h3>
+    <select id="subjectSelect">
+      <option>Math</option>
+      <option>English</option>
+      <option>Physics</option>
+      <option>Chemistry</option>
+      <option>Biology</option>
+    </select>
+    <button onclick="getSubjectTotal()">اعرض مجموع المادة</button>
+    <p id="subjectTotal"></p>
+  </div>
+
+  <script>
+    // ✅ كلاس الأساس: يحتوي على الاسم والدرجات
+    class StudentBase {
+      constructor(name, grades) {
+        this.name = name;
+        this.grades = grades; // {Math: 90, English: 85, ...}
+      }
+
+      // ✅ دالة لحساب مجموع الدرجات
+      getTotalScore() {
+        return Object.values(this.grades).reduce((sum, grade) => sum + grade, 0);
+      }
+
+      // ✅ دالة لجلب درجة مادة معينة
+      getSubjectScore(subject) {
+        return this.grades[subject] || 0;
+      }
+    }
+
+    // ✅ كلاس يرث من StudentBase - ممكن نضيف له دوال لاحقًا
+    class Student extends StudentBase {
+      constructor(name, grades) {
+        super(name, grades);
+      }
+
+      // دالة تعرض الدرجات بشكل جميل (اختياري)
+      getGradesString() {
+        return Object.entries(this.grades).map(([sub, score]) => `${sub}: ${score}`).join(", ");
+      }
+    }
+
+    // ✅ إنشاء الطلاب
+    const students = [
+      new Student("Ahmed",    { Math: 90, English: 85, Physics: 78, Chemistry: 80, Biology: 75 }),
+      new Student("Sara",     { Math: 95, English: 88, Physics: 91, Chemistry: 89, Biology: 93 }),
+      new Student("Ali",      { Math: 65, English: 70, Physics: 75, Chemistry: 68, Biology: 72 }),
+      new Student("Nada",     { Math: 88, English: 90, Physics: 84, Chemistry: 85, Biology: 87 }),
+      new Student("Mohamed",  { Math: 72, English: 68, Physics: 80, Chemistry: 76, Biology: 74 }),
+      new Student("Yasmine",  { Math: 91, English: 87, Physics: 89, Chemistry: 90, Biology: 92 }),
+      new Student("Omar",     { Math: 79, English: 83, Physics: 77, Chemistry: 81, Biology: 80 }),
+      new Student("Fatma",    { Math: 85, English: 80, Physics: 86, Chemistry: 88, Biology: 90 }),
+      new Student("Hassan",   { Math: 67, English: 75, Physics: 70, Chemistry: 72, Biology: 69 }),
+      new Student("Laila",    { Math: 93, English: 92, Physics: 89, Chemistry: 95, Biology: 94 })
+    ];
+
+    // ✅ عرض جدول كل الطلاب
+    function renderTable() {
+      const tbody = document.querySelector("#studentsTable tbody");
+      tbody.innerHTML = ""; // تفريغ الجدول
+
+      students.forEach(student => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${student.name}</td>
+            <td>${student.getSubjectScore("Math")}</td>
+            <td>${student.getSubjectScore("English")}</td>
+            <td>${student.getSubjectScore("Physics")}</td>
+            <td>${student.getSubjectScore("Chemistry")}</td>
+            <td>${student.getSubjectScore("Biology")}</td>
+          </tr>
+        `;
+      });
+    }
+
+    // ✅ دالة تعرض مجموع درجات طالب معين
+    function getStudentTotal() {
+      const name = document.getElementById("studentNameInput").value.trim();
+      const student = students.find(s => s.name.toLowerCase() === name.toLowerCase());
+
+      if (!student) {
+        document.getElementById("studentTotal").textContent = "🚫 الطالب غير موجود";
+        return;
+      }
+
+      const total = student.getTotalScore();
+      document.getElementById("studentTotal").textContent = `🔢 مجموع درجات ${student.name}: ${total}`;
+    }
+
+    // ✅ دالة لحساب مجموع درجات مادة معينة
+    function getSubjectTotal() {
+      const subject = document.getElementById("subjectSelect").value;
+      const total = students
+        .map(student => student.getSubjectScore(subject))
+        .reduce((sum, grade) => sum + grade, 0);
+
+      document.getElementById("subjectTotal").textContent = `📚 مجموع درجات ${subject}: ${total}`;
+    }
+
+    // ✅ تنفيذ الجدول عند تحميل الصفحة
+    window.onload = () => {
+      renderTable();
+    };
+  </script>
+</body>
+</html>

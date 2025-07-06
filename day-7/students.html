@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة درجات الطلاب</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial; background: #f0f0f0; padding: 20px; direction: rtl; }
+    .box { background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 0 10px #ccc; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #444; color: white; }
+    input, button, select { padding: 8px; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>📋 جدول الطلاب ودرجاتهم</h2>
+
+    <!-- جدول عرض الطلاب ودرجاتهم -->
+    <table id="studentsTable">
+      <thead><tr><th>الاسم</th><th>رياضيات</th><th>إنجليزي</th><th>فيزياء</th><th>كيمياء</th><th>أحياء</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- إدخال اسم طالب لعرض مجموع درجاته -->
+    <h3>🔍 مجموع درجات طالب معين</h3>
+    <input id="studentNameInput" placeholder="اكتب اسم الطالب" />
+    <button onclick="getStudentTotal()">اعرض المجموع</button>
+    <p id="studentTotal"></p>
+
+    <!-- إدخال اسم مادة لعرض مجموع درجاتها -->
+    <h3>📚 مجموع درجات مادة</h3>
+    <select id="subjectSelect">
+      <option>Math</option>
+      <option>English</option>
+      <option>Physics</option>
+      <option>Chemistry</option>
+      <option>Biology</option>
+    </select>
+    <button onclick="getSubjectTotal()">اعرض مجموع المادة</button>
+    <p id="subjectTotal"></p>
+  </div>
+
+  <script>
+    // مصفوفة الطلاب مع درجاتهم في 5 مواد
+    const students = [
+      { name: "Ahmed", grades: { Math: 90, English: 85, Physics: 78, Chemistry: 80, Biology: 75 } },
+      { name: "Sara", grades: { Math: 95, English: 88, Physics: 91, Chemistry: 89, Biology: 93 } },
+      { name: "Ali", grades: { Math: 65, English: 70, Physics: 75, Chemistry: 68, Biology: 72 } },
+      { name: "Nada", grades: { Math: 88, English: 90, Physics: 84, Chemistry: 85, Biology: 87 } },
+      { name: "Mohamed", grades: { Math: 72, English: 68, Physics: 80, Chemistry: 76, Biology: 74 } },
+      { name: "Yasmine", grades: { Math: 91, English: 87, Physics: 89, Chemistry: 90, Biology: 92 } },
+      { name: "Omar", grades: { Math: 79, English: 83, Physics: 77, Chemistry: 81, Biology: 80 } },
+      { name: "Fatma", grades: { Math: 85, English: 80, Physics: 86, Chemistry: 88, Biology: 90 } },
+      { name: "Hassan", grades: { Math: 67, English: 75, Physics: 70, Chemistry: 72, Biology: 69 } },
+      { name: "Laila", grades: { Math: 93, English: 92, Physics: 89, Chemistry: 95, Biology: 94 } },
+    ];
+
+    // عرض الجدول كامل
+    function renderTable() {
+      const tbody = document.querySelector("#studentsTable tbody");
+      tbody.innerHTML = "";
+      students.forEach(s => {
+        tbody.innerHTML += `<tr>
+          <td>${s.name}</td>
+          <td>${s.grades.Math}</td>
+          <td>${s.grades.English}</td>
+          <td>${s.grades.Physics}</td>
+          <td>${s.grades.Chemistry}</td>
+          <td>${s.grades.Biology}</td>
+        </tr>`;
+      });
+    }
+
+    // عرض مجموع درجات طالب معين
+    function getStudentTotal() {
+      const name = document.getElementById("studentNameInput").value.trim();
+      const student = students.find(s => s.name.toLowerCase() === name.toLowerCase());
+      if (!student) return document.getElementById("studentTotal").textContent = "🚫 الطالب غير موجود";
+      const total = Object.values(student.grades).reduce((a, b) => a + b, 0);
+      document.getElementById("studentTotal").textContent = `🔢 مجموع درجات ${student.name}: ${total}`;
+    }
+
+    // عرض مجموع درجات مادة معينة
+    function getSubjectTotal() {
+      const subject = document.getElementById("subjectSelect").value;
+      const total = students.map(s => s.grades[subject]).reduce((a, b) => a + b, 0);
+      document.getElementById("subjectTotal").textContent = `📚 مجموع درجات مادة ${subject}: ${total}`;
+    }
+
+
+    // تشغيل أولي عند فتح الصفحة
+    window.onload = () => {
+      renderTable();
+    };
+  </script>
+</body>
+</html>

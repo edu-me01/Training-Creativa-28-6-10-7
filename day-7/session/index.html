@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>modules</title>
+    </head>
+    <body>
+        <div id="print"></div>
+        <script >
+            function add(a, b) {
+                console.log("we will add two numbers");
+                alert(`first number is ${a} , second number is ${b}`);
+                document.getElementById("print").innerHTML = `${a} + ${b}`;
+                return a + b;
+            }
+        </script>
+        <script type="module" src="./app.js"></script>
+    </body>
+</html>

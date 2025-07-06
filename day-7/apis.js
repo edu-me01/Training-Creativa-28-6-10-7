@@ -43,3 +43,15 @@ async function getUser(ID) {
 }
 
 getUser(1);
+
+const arrayOfObjects = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+  { id: 3, name: "Charlie" },
+  { id: 4, name: "Diana" },
+  { id: 5, name: "Eve" },
+  { id: 6, name: "Frank" }
+];
+
+const firstFiveObjects = arrayOfObjects.slice(0, 5);
+console.log(firstFiveObjects);
