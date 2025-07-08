@@ -16,7 +16,7 @@
             <option value="users"> see users </option>
         </select>
         <select name="viewId" id="viewId">
-            <option value="1">id=1</option>
+            <!-- <option value="1">id=1</option> -->
         </select>
 
         <button type="button" onclick="showResult()">show</button>
@@ -42,7 +42,7 @@
             console.log(Object.keys(result));
             var arrOfKeys = Object.keys(result);
             
-            resultViewer.innerHTML += `
+            resultViewer.innerHTML = `
             <div class="post">
                 <h3>${result[arrOfKeys[2]]}</h3>
                 <p>${result[arrOfKeys[3]]}</p>

@@ -1,4 +1,4 @@
-const students = [
+var students = [
   { name: "Ahmed", score: 90 },
   { name: "Sara", score: 85 },
   { name: "Mohamed", score: 70 },
@@ -12,19 +12,19 @@ const students = [
 ];
 
 // 1️⃣ filter → الطلاب اللي درجاتهم عالية (أكبر من أو = 85)
-const highScorers = students.filter(student => student.score >= 85);
+var highScorers = students.filter(student => student.score > 85);
 console.log("الطلاب اللي جايبين أكتر من 85:");
 console.log(highScorers);
 
 // 2️⃣ reduce → نحسب مجموع درجات كل الطلاب
-const totalScore = students.reduce((sum, student) => sum + student.score, 0);
+var totalScore = students.reduce((sum, student) => sum + student.score, 0);
 console.log("إجمالي درجات كل الطلاب:", totalScore);
 
 // 3️⃣ map + filter + reduce → درجات شخص معين (مثلاً أحمد)
-const nameToFind = "Ahmed";
-const ahmedScores = students
+var nameToFind = "Ahmed";
+var ahmedScores = students
   .filter(student => student.name === nameToFind)
   .map(student => student.score);
 
-const ahmedTotal = ahmedScores.reduce((sum, score) => sum + score, 0);
+var ahmedTotal = ahmedScores.reduce((sum, score) => sum + score, 0);
 console.log(`إجمالي درجات ${nameToFind}:`, ahmedTotal);

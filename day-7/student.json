@@ -1,0 +1,12 @@
+[
+      { "name": "Ahmed", "grades": { "Math": 90, "English": 85, "Physics": 78, "Chemistry": 80, "Biology": 75 } },
+      { "name": "Sara", "grades": { "Math": 95, "English": 88, "Physics": 91, "Chemistry": 89, "Biology": 93 } },
+      { "name": "Ali", "grades": { "Math": 65, "English": 70, "Physics": 75, "Chemistry": 68, "Biology": 72 } },
+      { "name": "Nada", "grades": { "Math": 88, "English": 90, "Physics": 84, "Chemistry": 85, "Biology": 87 } },
+      { "name": "Mohamed", "grades": { "Math": 72, "English": 68, "Physics": 80, "Chemistry": 76, "Biology": 74 } },
+      { "name": "Yasmine", "grades": { "Math": 91, "English": 87, "Physics": 89, "Chemistry": 90, "Biology": 92 } },
+      { "name": "Omar", "grades": { "Math": 79, "English": 83, "Physics": 77, "Chemistry": 81, "Biology": 80 } },
+      { "name": "Fatma", "grades": { "Math": 85, "English": 80, "Physics": 86, "Chemistry": 88, "Biology": 90 } },
+      { "name": "Hassan", "grades": { "Math": 67, "English": 75, "Physics": 70, "Chemistry": 72, "Biology": 69 } },
+      { "name": "Laila", "grades": { "Math": 93, "English": 92, "Physics": 89, "Chemistry": 95, "Biology": 94 } }
+]

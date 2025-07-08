@@ -4,20 +4,24 @@ fetch('https://jsonplaceholder.typicode.com/posts')
   .catch(error => console.error('Error:', error));
 
   fetch('https://jsonplaceholder.typicode.com/photos?_limit=5')
-  .then(response => response.json())
+  .then(response =>{ 
+    console.log(response);
+   return response.json()
+  })
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));
 
-async function fetchPosts(theAPISource) {
+async function fetchPosts(number) {
   try {
-    const response = await fetch(theAPISource);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${number}`);
     const data = await response.json();
     console.log(data);
+    return data;
   } catch (error) {
     console.error('Error fetching posts:', error);
   }
 }
-fetchPosts('https://jsonplaceholder.typicode.com/posts?_limit=5');
+// fetchPosts();
 
 
 var arrowPosts = async (theAPISource) => {
@@ -25,24 +29,26 @@ var arrowPosts = async (theAPISource) => {
     const response = await fetch(theAPISource);
     const data = await response.json();
     console.log(data);
+    return data;
   } catch (error) {
     console.error('Error fetching posts:', error);
   }
 }
-arrowPosts('https://jsonplaceholder.typicode.com/posts?_limit=5');
+// arrowPosts('https://jsonplaceholder.typicode.com/posts?_limit=5');
 
 
-async function getUser(ID) {
+async function getUser(id) {
   try {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/users/${ID}`);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
     const user = await response.json();
     console.log(user.name);
+    return user ;
   } catch (error) {
     console.error('Error:', error);
   }
 }
 
-getUser(1);
+// getUser(1);
 
 const arrayOfObjects = [
   { id: 1, name: "Alice" },
