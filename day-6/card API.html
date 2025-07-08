@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Cards from API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    #products-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 15px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .product-card h3 {
+      font-size: 16px;
+      color: #4a6bdf;
+      margin-bottom: 10px;
+    }
+
+    .product-card p {
+      font-size: 14px;
+      color: #555;
+      margin: 5px 0;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #1a8917;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Products from FakeStore API</h1>
+  <div id="products-container">
+
+               
+  </div>
+
+  <script>
+    const container = document.getElementById("products-container");
+
+    // Fetch products from API
+    fetch('https://fakestoreapi.com/products')
+      .then(response => response.json())
+      .then(products => {
+        for (let i = 0; i < products.length; i++) {
+          const product = products[i];
+
+          const card = document.createElement("div");
+          card.classList.add("product-card");
+
+          card.innerHTML = `
+            <img src="${product.image}" alt="${product.title}">
+            <h3>${product.title}</h3>
+            <p class="price">$${product.price}</p>
+            <p>${product.description.slice(0, 60)}...</p>
+          `;
+
+          container.appendChild(card);
+        }
+      })
+      .catch(error => {
+        container.innerHTML = `<p style="color:red;">فشل في تحميل المنتجات: ${error.message}</p>`;
+      });
+  </script>
+
+</body>
+</html>

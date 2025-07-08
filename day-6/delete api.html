@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete Example</title>
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+    }
+
+    button {
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c9302c;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Posts</h2>
+  <div id="postsContainer"></div>
+
+  <script>
+    const container = document.getElementById('postsContainer');
+
+    // Load posts from API
+    fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
+      .then(res => res.json())
+      .then(posts => {
+        posts.forEach(post => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h3>${post.title}</h3>
+            <p>${post.body}</p>
+            <button onclick="deletePost(${post.id}, this)">Delete</button>
+          `;
+          container.appendChild(card);
+        });
+      });
+
+    // Delete function
+    function deletePost(id, btn) {
+      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Delete failed');
+        // remove card from UI
+        btn.parentElement.remove();
+        alert(`Post ${id} deleted successfully`);
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Error deleting post');
+      });
+    }
+  </script>
+
+</body>
+</html>
